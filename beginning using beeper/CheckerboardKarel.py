@@ -15,13 +15,18 @@ from karel.stanfordkarel import *
 
 
 def turn_right():
+    """
+    Makes Karel turn 90 degrees to the right by executing three left turns
+    """
     for i in range(3):
         turn_left()
 
 
 def move_odd_line():
     """
-
+    Fills an odd-numbered row with beepers in a staggered pattern.
+    Starts by placing a beeper at the first available spot and continues
+    moving two steps at a time to maintain the gap.
     """
     put_beeper()
     while front_is_clear():
@@ -34,9 +39,12 @@ def move_odd_line():
 
 def move_even_line():
     """
-
+    Fills an even-numbered row with beepers.
+    The logic accounts for the final state of the previous row to ensure 
+    the checkerboard pattern remains consistent across the entire world.
     """
     if on_beeper():
+        # If the previous row ended with a beeper, start this row by moving first
         while front_is_clear():
             if front_is_clear():
                 move()
@@ -44,6 +52,7 @@ def move_even_line():
                 move()
                 put_beeper()
     else:
+        # If the previous row ended without a beeper, start this row with a beeper
         move()
         put_beeper()
         while front_is_clear():
@@ -56,8 +65,8 @@ def move_even_line():
 
 def main():
     """
-    write odd and even number
-
+    Main execution loop that alternates between odd and even row filling strategies.
+    Uses a 'state reminder' to bridge the logic between horizontal rows.
     """
     while True:
         move_odd_line()
