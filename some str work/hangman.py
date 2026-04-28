@@ -41,10 +41,12 @@ def main():
     life = 7
     word = random_word()
     long = len(word)
+    # Initialize the hidden answer with dashes
     ans = "-"*len(word)
     print("The word looks like:" + ans)
     print("You have " + str(life) + " wrong guesses left.")
     while life > 0:
+        # Input Validation Loop: Ensures the user enters exactly one alphabetical character
         while True:
             guess = input("Your guess:")
             if not guess.isalpha() or len(guess) != 1:
