@@ -3,6 +3,11 @@ import matplotlib.pyplot as plt
 
 
 def logic_gate_predict(row):
+	"""
+	透過資料視覺化分析出的存活規則：
+    1. 女性優先：但在 Pclass 3 且 S 港口登船者，數據顯示生存率驟降，故判定為 0。
+    2. 孩童與階級：男性中，僅有 17 歲以下且身處中高階艙等 (Pclass 1, 2) 者具備生存優勢。
+	"""
 	if row['Sex'] == 'female':
 		if row['Pclass'] == 3 and row['Embarked'] == 'S':
 			return 0
